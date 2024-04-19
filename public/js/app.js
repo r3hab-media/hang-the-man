@@ -14,6 +14,13 @@ function displayWord() {
 
 function updateRemainingGuesses() {
 	document.getElementById("remainingGuesses").textContent = remainingGuesses;
+
+	// Update hangman graphic based on remaining guesses
+	const parts = [null, "leftLeg", "rightLeg", "leftArm", "rightArm", "body", "head"];
+	const index = 6 - remainingGuesses; // Calculate which part to show
+	if (index > 0 && index < parts.length) {
+		document.getElementById(parts[index]).style.display = "block";
+	}
 }
 
 function handleGuess(letter) {
@@ -41,14 +48,14 @@ function checkGameEnd() {
 		document.getElementById("message").textContent = "Congratulations! You won!";
 		saveWordHistory(selectedWord, true); // true for a win
 		displayWordHistory();
-		setTimeout(fetchRandomWord, 3000); // Fetch a new word after 3 seconds, also after a win
+		setTimeout(resetGame, 3000); // Reset the game after 3 seconds
 	} else if (remainingGuesses <= 0) {
 		document.getElementById("message").textContent = "Game Over! Try again!";
 		saveWordHistory(selectedWord, false); // false for a loss
 		displayWordHistory();
 		guessingWord = selectedWord.split("");
 		displayWord();
-		setTimeout(fetchRandomWord, 3000); // Fetch a new word after 3 seconds, also after a loss
+		setTimeout(resetGame, 3000); // Reset the game after 3 seconds
 	}
 }
 
@@ -128,4 +135,27 @@ async function fetchRandomWord() {
 		console.error("Fetch error:", error);
 		document.getElementById("message").textContent = "Failed to fetch word, check your connection.";
 	}
+}
+
+function resetGame() {
+	// Reset the game state
+	remainingGuesses = 6;
+	document.getElementById("remainingGuesses").textContent = remainingGuesses;
+
+	// Hide all hangman parts
+	document.querySelectorAll(".hangman-part").forEach((part) => {
+		part.style.display = "none";
+	});
+
+	// Re-enable all letter buttons and remove used marks
+	document.querySelectorAll("#letters button").forEach((button) => {
+		button.disabled = false;
+		button.classList.remove("used");
+	});
+
+	// Clear messages
+	document.getElementById("message").textContent = "";
+
+	// Fetch a new word to start a new game
+	fetchRandomWord();
 }
