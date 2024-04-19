@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangman</title>
+  <script src="js/app.js" defer></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css'
+    integrity='sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=='
+    crossorigin='anonymous' />
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">Hang the Man!</h1>
+    <p>Guess the word:</p>
+    <div id="wordToGuess" aria-live="polite" aria-atomic="true"></div>
+    <div id="letters" class="letter-buttons"></div>
+    <h1 class="guesses">Remaining guesses:</h1>
+    <span class="guesses-count" id="remainingGuesses">6</span>
+    <p id="message" aria-live="polite" aria-atomic="true"></p>
+    <button id="clearHistoryButton" class="btn btn-outline-danger" onclick="clearHistory()" style="display: none;">Clear
+      History</button>
+    <p id="historyMessage" style="display: none;">Click on a word to get its meeaning.</p>
+    <div id="wordHistory" aria-live="polite"></div>
+  </div>
+</body>
+
+</html>
