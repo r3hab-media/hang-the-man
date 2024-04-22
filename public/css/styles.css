@@ -52,7 +52,9 @@ body {
 }
 
 .guesses-count {
-	font-size: 5rem;
+	font-size: inherit;
+  font-weight: bolder;
+  color: red;
 }
 
 h1.title + p {
@@ -61,7 +63,7 @@ h1.title + p {
 
 /* Hangman */
 #hangman {
-  height: 250px;  /* Fixed height, consider making this relative if needed */
+  height: 150px;  /* Fixed height, consider making this relative if needed */
   position: relative;
   display: flex;
   justify-content: center;
